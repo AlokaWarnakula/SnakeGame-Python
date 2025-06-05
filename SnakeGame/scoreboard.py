@@ -11,7 +11,9 @@ class ScoreBoard(Turtle):
         super().__init__()
         self.score = 0
         self.color("white")
-        self.high_score = 0
+        self.file = open("SnakeData.txt" , "r")
+        self.high_score = int(self.file.read())
+        self.file.close()
         self.penup()
         self.hideturtle()
         self.goto(0, 270)  # title location
@@ -23,19 +25,29 @@ class ScoreBoard(Turtle):
         self.writingScore()
 
     def writingScore(self):
+        if self.score > self.high_score:
+            file = open("SnakeData.txt", "w")
+            file.write(str(self.score))
+            file.close()
+
         score = self.score
-        self.write(f"Total Score is: {score}", move=False, align=ALIGN, font=FONT)
+        high_score = self.high_score
+        self.write(f"Highest Score: {high_score} | Current Score: {score}", move=False, align=ALIGN, font=FONT)
 
     def hitWall(self):
         if self.score > self.high_score:
-            self.high_score = self.score
+            file = open("SnakeData.txt" , "w")
+            file.write(str(self.score))
+            file.close()
 
         self.goto(0, 0)
         self.write("Hit the wall", move=False, align=ALIGN, font=LOSE)
 
     def hitBody(self):
         if self.score > self.high_score:
-            self.high_score = self.score
+            file = open("SnakeData.txt", "w")
+            file.write(str(self.score))
+            file.close()
 
         self.goto(0, 0)
         self.write("Hit the body", move=False, align=ALIGN, font=LOSE)

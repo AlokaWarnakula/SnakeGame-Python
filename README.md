@@ -75,12 +75,30 @@ Here’s a quick look at the game in action:
 * Food spawns at random positions
 * Score tracking and game-over messages
 * Clean and modular code structure (easy to extend)
+* File read and write for saving previous high score count
 
+---
+
+## 💡File Saving & Loading
+
+The game maintains a high score stored in the file SnakeData.txt located in the SnakeGame folder.
+When the game starts, it reads the high score from this file:
+          
+```
+with open("SnakeGame/SnakeData.txt", "r") as file:
+    high_score = int(file.read())
+```
+
+When a new high score is achieved, it updates the file:
+          
+```
+with open("SnakeGame/SnakeData.txt", "w") as file:
+    file.write(str(new_high_score))
+```
 ---
 
 ## 🧠 Possible Future Additions
 
-* High score tracking
 * Difficulty levels
 * Restart option on game over
 * Sound effects and animations
