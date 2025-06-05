@@ -11,6 +11,7 @@ class ScoreBoard(Turtle):
         super().__init__()
         self.score = 0
         self.color("white")
+        self.high_score = 0
         self.penup()
         self.hideturtle()
         self.goto(0, 270)  # title location
@@ -26,9 +27,15 @@ class ScoreBoard(Turtle):
         self.write(f"Total Score is: {score}", move=False, align=ALIGN, font=FONT)
 
     def hitWall(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+
         self.goto(0, 0)
         self.write("Hit the wall", move=False, align=ALIGN, font=LOSE)
 
     def hitBody(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+
         self.goto(0, 0)
         self.write("Hit the body", move=False, align=ALIGN, font=LOSE)
